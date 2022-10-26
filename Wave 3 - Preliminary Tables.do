@@ -37,6 +37,7 @@ putexcel set ///
 "$sehat/SEHAT Study/Output/Wave 3 - Oct 2022/Preliminary Tables_Tranche `tranche'_`c(current_date)'.xlsx", ///
 sheet("Sample_Tranche`tranche'") replace
 
+* Add column labels
 putexcel A1 = "Current Sample by Age Group"
 putexcel (A1:C1), merge hcenter vcenter
 
@@ -55,6 +56,7 @@ putexcel A11 = "Ages 40-59"
 putexcel A12 = "Ages 60+"
 putexcel A13 = "Total"
 
+* Number of observations by age group and gender
 tab agegroup gender, matcell(cellcounts)
 putexcel B4 = matrix(cellcounts), hcenter
 
@@ -63,6 +65,7 @@ putexcel B13 = `r(N)', hcenter
 count if gender=="M" & age_yrs!=.
 putexcel C13 = `r(N)', hcenter
 
+* Number of observations under member status of 'dead' or 'emigrated' (ie not in sample)
 putexcel B15 = "N (Not in HH)", hcenter
 putexcel A16 = "Dead"
 putexcel A17 = "Emigrated" 
